@@ -3,7 +3,7 @@ import * as JWT from 'jose';
 const secret = new TextEncoder().encode(process.env.JWT_TOKEN_SECRET);
 const alg = 'HS256';
 const auth = {
-    authenticate: ['/api/user/info', '/api/user/authenticate'],
+    authenticate: ['/api/user/info', '/api/user/authenticate', '/api/user/authorize'],
     admin: '/api/lessons/admin/',
     tutor: '/api/lessons/tutor/',
     student: '/api/lessons/student/',
