@@ -27,6 +27,55 @@ const student_values = student_data.value;
 const {data: supporter_data} = await useFetch('/api/lessons/supporter/get', {method: 'GET'});
 const supporter_values = supporter_data.value;
 
+if(!admin_values.hasOwnProperty('error')) {
+  admin_values.forEach((element:any) => {
+    element.year = (new Date(element.start_date).getUTCFullYear()) < 10 ? '0' + (new Date(element.start_date).getUTCFullYear()) : (new Date(element.start_date).getUTCFullYear());
+    element.month = (new Date(element.start_date).getUTCMonth()+1) < 10 ? '0' + (new Date(element.start_date).getUTCMonth()+1) : (new Date(element.start_date).getUTCMonth()+1);
+    element.day = (new Date(element.start_date).getUTCDate()) < 10 ? '0' + (new Date(element.start_date).getUTCDate()) : (new Date(element.start_date).getUTCDate());
+    element.start_hour = (new Date(element.start_date).getUTCHours()) < 10 ? '0' + (new Date(element.start_date).getUTCHours()) : (new Date(element.start_date).getUTCHours());
+    element.start_minute = (new Date(element.start_date).getUTCMinutes()) < 10 ? '0' + (new Date(element.start_date).getUTCMinutes()) : (new Date(element.start_date).getUTCMinutes());
+    element.end_hour = (new Date(element.end_date).getUTCHours()) < 10 ? '0' + (new Date(element.end_date).getUTCHours()) : (new Date(element.end_date).getUTCHours());
+    element.end_minute = (new Date(element.end_date).getUTCMinutes()) < 10 ? '0' + (new Date(element.end_date).getUTCMinutes()) : (new Date(element.end_date).getUTCMinutes());
+  });
+}
+
+if(!tutor_values.hasOwnProperty('error')) {
+  tutor_values.forEach((element:any) => {
+    element.year = (new Date(element.start_date).getUTCFullYear()) < 10 ? '0' + (new Date(element.start_date).getUTCFullYear()) : (new Date(element.start_date).getUTCFullYear());
+    element.month = (new Date(element.start_date).getUTCMonth()+1) < 10 ? '0' + (new Date(element.start_date).getUTCMonth()+1) : (new Date(element.start_date).getUTCMonth()+1);
+    element.day = (new Date(element.start_date).getUTCDate()) < 10 ? '0' + (new Date(element.start_date).getUTCDate()) : (new Date(element.start_date).getUTCDate());
+    element.start_hour = (new Date(element.start_date).getUTCHours()) < 10 ? '0' + (new Date(element.start_date).getUTCHours()) : (new Date(element.start_date).getUTCHours());
+    element.start_minute = (new Date(element.start_date).getUTCMinutes()) < 10 ? '0' + (new Date(element.start_date).getUTCMinutes()) : (new Date(element.start_date).getUTCMinutes());
+    element.end_hour = (new Date(element.end_date).getUTCHours()) < 10 ? '0' + (new Date(element.end_date).getUTCHours()) : (new Date(element.end_date).getUTCHours());
+    element.end_minute = (new Date(element.end_date).getUTCMinutes()) < 10 ? '0' + (new Date(element.end_date).getUTCMinutes()) : (new Date(element.end_date).getUTCMinutes());
+  });
+}
+
+if(!student_values.hasOwnProperty('error')) {
+  student_values.forEach((element:any) => {
+    element.year = (new Date(element.start_date).getUTCFullYear()) < 10 ? '0' + (new Date(element.start_date).getUTCFullYear()) : (new Date(element.start_date).getUTCFullYear());
+    element.month = (new Date(element.start_date).getUTCMonth()+1) < 10 ? '0' + (new Date(element.start_date).getUTCMonth()+1) : (new Date(element.start_date).getUTCMonth()+1);
+    element.day = (new Date(element.start_date).getUTCDate()) < 10 ? '0' + (new Date(element.start_date).getUTCDate()) : (new Date(element.start_date).getUTCDate());
+    element.start_hour = (new Date(element.start_date).getUTCHours()) < 10 ? '0' + (new Date(element.start_date).getUTCHours()) : (new Date(element.start_date).getUTCHours());
+    element.start_minute = (new Date(element.start_date).getUTCMinutes()) < 10 ? '0' + (new Date(element.start_date).getUTCMinutes()) : (new Date(element.start_date).getUTCMinutes());
+    element.end_hour = (new Date(element.end_date).getUTCHours()) < 10 ? '0' + (new Date(element.end_date).getUTCHours()) : (new Date(element.end_date).getUTCHours());
+    element.end_minute = (new Date(element.end_date).getUTCMinutes()) < 10 ? '0' + (new Date(element.end_date).getUTCMinutes()) : (new Date(element.end_date).getUTCMinutes());
+  });
+}
+
+if(!supporter_values.hasOwnProperty('error')) {
+  supporter_values.forEach((element:any) => {
+    element.year = (new Date(element.start_date).getUTCFullYear()) < 10 ? '0' + (new Date(element.start_date).getUTCFullYear()) : (new Date(element.start_date).getUTCFullYear());
+    element.month = (new Date(element.start_date).getUTCMonth()+1) < 10 ? '0' + (new Date(element.start_date).getUTCMonth()+1) : (new Date(element.start_date).getUTCMonth()+1);
+    element.day = (new Date(element.start_date).getUTCDate()) < 10 ? '0' + (new Date(element.start_date).getUTCDate()) : (new Date(element.start_date).getUTCDate());
+    element.start_hour = (new Date(element.start_date).getUTCHours()) < 10 ? '0' + (new Date(element.start_date).getUTCHours()) : (new Date(element.start_date).getUTCHours());
+    element.start_minute = (new Date(element.start_date).getUTCMinutes()) < 10 ? '0' + (new Date(element.start_date).getUTCMinutes()) : (new Date(element.start_date).getUTCMinutes());
+    element.end_hour = (new Date(element.end_date).getUTCHours()) < 10 ? '0' + (new Date(element.end_date).getUTCHours()) : (new Date(element.end_date).getUTCHours());
+    element.end_minute = (new Date(element.end_date).getUTCMinutes()) < 10 ? '0' + (new Date(element.end_date).getUTCMinutes()) : (new Date(element.end_date).getUTCMinutes());
+  });
+}
+
+
 let show = useCookie('view').value || '';
 if(show !== "supporter" && show !== "student" && show !== "tutor" && show !== "admin")
   show = getFirstShow(info_values) || '';
@@ -93,6 +142,19 @@ async function cancel_lesson(id: string) {
     }
   }
 }
+
+async function request_support(id: string) {
+  if(confirm("Förderung beantragen?")) {
+    const {data: request_res} = await useFetch('/api/lessons/student/request', {method: 'POST', body: {id: id}});
+    if(request_res.value?.hasOwnProperty('error')) {
+      alert("Anderer Fehler");
+    }
+    else {
+      alert("Erfolgreich!");
+      location.href = "/dashboard";
+    }
+  }
+}
 </script>
 
 <template>
@@ -143,9 +205,11 @@ async function cancel_lesson(id: string) {
         </div>
       </div>
       <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
-        <p class="text-sm leading-6 text-gray-900">{{ (new Date(lesson.start_date)).getDate() }}.{{ (new Date(lesson.start_date)).getMonth()+1 }}.{{ (new Date(lesson.start_date)).getFullYear() }}</p>
+        <p class="text-sm leading-6 text-gray-900">
+          {{ lesson.day }}.{{ lesson.month }}.{{ lesson.year }}
+        </p>
         <p class="mt-1 text-xs leading-5 text-gray-500">
-          {{ (new Date(lesson.start_date).getHours()) < 10 ? '0' + (new Date(lesson.start_date).getHours()) : (new Date(lesson.start_date).getHours()).toString() }}:{{ (new Date(lesson.start_date).getMinutes()) < 10 ? '0' + (new Date(lesson.start_date).getMinutes()) : (new Date(lesson.start_date).getMinutes()).toString() }} - {{ (new Date(lesson.end_date).getHours()) < 10 ? '0' + (new Date(lesson.end_date).getHours()) : (new Date(lesson.end_date).getHours()).toString() }}:{{ (new Date(lesson.end_date).getMinutes()) < 10 ? '0' + (new Date(lesson.end_date).getMinutes()) : (new Date(lesson.end_date).getMinutes()).toString() }}
+          {{ lesson.start_hour }}:{{ lesson.start_minute }} - {{ lesson.end_hour }}:{{ lesson.end_minute }}
         </p>
       </div>
     </li>
@@ -155,22 +219,22 @@ async function cancel_lesson(id: string) {
     <div>
       <button @click="navigateTo('/addLesson')" id="add-lesson" class="cursor-pointer rounded-md bg-indigo-600 ml-10 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Stunde anlegen</button>
     </div>
-    <li v-for="lesson in tutor_values" :key="lesson.id">
-      <div v-if="lesson.paid===false && lesson.canceled === false" class="flex justify-between gap-x-6 py-5">
-        <div class="flex min-w-0 gap-x-4 ml-4">
-          <div class="min-w-0 flex-auto">
-            <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
-            <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }}</p>
-          </div>
+    <li v-for="lesson in tutor_values" :key="lesson.id" class="flex justify-between gap-x-6 py-5">
+      <div class="flex min-w-0 gap-x-4 ml-4">
+        <div class="min-w-0 flex-auto">
+          <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }}</p>
         </div>
-        <button id="cancel-lesson" @click="cancel_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">cancel</button>
-        <button id="paid-lesson" @click="paid_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">paid</button>
-        <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
-          <p class="text-sm leading-6 text-gray-900">{{ (new Date(lesson.start_date)).getDate() }}.{{ (new Date(lesson.start_date)).getMonth()+1 }}.{{ (new Date(lesson.start_date)).getFullYear() }}</p>
-          <p class="mt-1 text-xs leading-5 text-gray-500">
-            {{ (new Date(lesson.start_date).getHours()) < 10 ? '0' + (new Date(lesson.start_date).getHours()) : (new Date(lesson.start_date).getHours()).toString() }}:{{ (new Date(lesson.start_date).getMinutes()) < 10 ? '0' + (new Date(lesson.start_date).getMinutes()) : (new Date(lesson.start_date).getMinutes()).toString() }} - {{ (new Date(lesson.end_date).getHours()) < 10 ? '0' + (new Date(lesson.end_date).getHours()) : (new Date(lesson.end_date).getHours()).toString() }}:{{ (new Date(lesson.end_date).getMinutes()) < 10 ? '0' + (new Date(lesson.end_date).getMinutes()) : (new Date(lesson.end_date).getMinutes()).toString() }}
-          </p>
-        </div>
+      </div>
+      <button id="cancel-lesson" @click="cancel_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">cancel</button>
+      <button id="paid-lesson" @click="paid_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">paid</button>
+      <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
+        <p class="text-sm leading-6 text-gray-900">
+          {{ lesson.day }}.{{ lesson.month }}.{{ lesson.year }}
+        </p>
+        <p class="mt-1 text-xs leading-5 text-gray-500">
+          {{ lesson.start_hour }}:{{ lesson.start_minute }} - {{ lesson.end_hour }}:{{ lesson.end_minute }}
+        </p>
       </div>
     </li>
   </ul>
@@ -183,10 +247,18 @@ async function cancel_lesson(id: string) {
           <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }}</p>
         </div>
       </div>
+      <div v-if="lesson.paid===true && lesson.req_support===false">
+        <button id="cancel-lesson" @click="request_support(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">request</button>
+      </div>
+      <div v-if="lesson.req_support===true">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">requested</p>
+      </div>
       <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
-        <p class="text-sm leading-6 text-gray-900">{{ (new Date(lesson.start_date)).getDate() }}.{{ (new Date(lesson.start_date)).getMonth()+1 }}.{{ (new Date(lesson.start_date)).getFullYear() }}</p>
+        <p class="text-sm leading-6 text-gray-900">
+          {{ lesson.day }}.{{ lesson.month }}.{{ lesson.year }}
+        </p>
         <p class="mt-1 text-xs leading-5 text-gray-500">
-          {{ (new Date(lesson.start_date).getHours()) < 10 ? '0' + (new Date(lesson.start_date).getHours()) : (new Date(lesson.start_date).getHours()).toString() }}:{{ (new Date(lesson.start_date).getMinutes()) < 10 ? '0' + (new Date(lesson.start_date).getMinutes()) : (new Date(lesson.start_date).getMinutes()).toString() }} - {{ (new Date(lesson.end_date).getHours()) < 10 ? '0' + (new Date(lesson.end_date).getHours()) : (new Date(lesson.end_date).getHours()).toString() }}:{{ (new Date(lesson.end_date).getMinutes()) < 10 ? '0' + (new Date(lesson.end_date).getMinutes()) : (new Date(lesson.end_date).getMinutes()).toString() }}
+          {{ lesson.start_hour }}:{{ lesson.start_minute }} - {{ lesson.end_hour }}:{{ lesson.end_minute }}
         </p>
       </div>
     </li>
@@ -196,14 +268,16 @@ async function cancel_lesson(id: string) {
     <li v-for="lesson in supporter_values" :key="lesson.id" class="flex justify-between gap-x-6 py-5">
       <div class="flex min-w-0 gap-x-4 ml-4">
         <div class="min-w-0 flex-auto">
-          <p class="text-sm font-semibold leading-6 text-gray-900">Student: {{ lesson.student_name }}</p>
-          <p class="mt-1 truncate text-xs leading-5 text-gray-500">Tutor: {{ lesson.tutor_name }}</p>
+          <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.tutor_name }}</p>
         </div>
       </div>
       <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
-        <p class="text-sm leading-6 text-gray-900">{{ lesson.id }}</p>
+        <p class="text-sm leading-6 text-gray-900">
+          {{ lesson.day }}.{{ lesson.month }}.{{ lesson.year }}
+        </p>
         <p class="mt-1 text-xs leading-5 text-gray-500">
-          {{ (new Date(lesson.start_date).getHours()) < 10 ? '0' + (new Date(lesson.start_date).getHours()) : (new Date(lesson.start_date).getHours()).toString() }}:{{ (new Date(lesson.start_date).getMinutes()) < 10 ? '0' + (new Date(lesson.start_date).getMinutes()) : (new Date(lesson.start_date).getMinutes()).toString() }} - {{ (new Date(lesson.end_date).getHours()) < 10 ? '0' + (new Date(lesson.end_date).getHours()) : (new Date(lesson.end_date).getHours()).toString() }}:{{ (new Date(lesson.end_date).getMinutes()) < 10 ? '0' + (new Date(lesson.end_date).getMinutes()) : (new Date(lesson.end_date).getMinutes()).toString() }}
+          {{ lesson.start_hour }}:{{ lesson.start_minute }} - {{ lesson.end_hour }}:{{ lesson.end_minute }}
         </p>
       </div>
     </li>
