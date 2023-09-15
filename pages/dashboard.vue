@@ -194,8 +194,8 @@ async function request_support(id: string) {
 
   <ul v-if="show==='admin'" role="list" class="divide-y divide-gray-100">
     <div>
-      <button id="add-user" @click="add_user" class="cursor-pointer rounded-md bg-indigo-600 ml-10 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Benutzer anlegen</button>
-      <button id="del-user" @click="del_user" class="cursor-pointer rounded-md bg-indigo-600 ml-5 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Benutzer löschen</button>
+      <button id="add-user" @click="navigateTo('/addUser')" class="cursor-pointer rounded-md bg-indigo-600 ml-10 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Benutzer anlegen</button>
+      <button id="del-user" @click="navigateTo('/delUser')" class="cursor-pointer rounded-md bg-indigo-600 ml-5 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Benutzer löschen</button>
     </div>
     <li v-for="lesson in admin_values" :key="lesson.id" class="flex justify-between gap-x-6 py-5">
       <div class="flex min-w-0 gap-x-4 ml-4">

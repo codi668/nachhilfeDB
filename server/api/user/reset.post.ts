@@ -10,19 +10,15 @@ export default defineEventHandler(async (event) => {
     if(!reset_token) return {error: "wrong link"};
     if((!password1 || !password2) || (password1 !== password2)) return {error: "check input"};
 
-    const data_check_reset = await prisma.user.findFirst({
+    const user = await prisma.user.findFirst({
         where: {reset_token: reset_token}
     })
 
-    if(data_check_reset === null) return {error: "wrong link"};
+    if(user === null) return {error: "wrong link"};
 
     await prisma.user.updateMany({
         where: {reset_token: reset_token},
         data: {password: password1, reset_token: ''}
-    })
-
-    const user = await prisma.user.findFirst({
-        where: {reset_token: reset_token}
     })
 
     const jwt = await new JWT.SignJWT({ id: user?.id, admin: user?.admin, tutor: user?.tutor,
@@ -36,5 +32,5 @@ export default defineEventHandler(async (event) => {
 
     setCookie(event, 'jwt', jwt);
 
-    return {jwt: jwt};
+    return {sucess: jwt};
 })

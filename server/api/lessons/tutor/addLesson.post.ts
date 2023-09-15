@@ -16,8 +16,8 @@ export default defineEventHandler(async (event) => {
     const start_minute = start_time.slice(3, 5);
     const end_hour = end_time.slice(0, 2);
     const end_minute = end_time.slice(3, 5);
-    const start_date = new Date(Date.UTC(year, month, day, start_hour, start_minute));
-    const end_date = new Date(Date.UTC(year, month, day, end_hour, end_minute));
+    const start_date = new Date(Date.UTC(year, month-1, day, start_hour, start_minute));
+    const end_date = new Date(Date.UTC(year, month-1, day, end_hour, end_minute));
 
     const tutor_name = (await prisma.user.findFirst({
         where: {
@@ -42,5 +42,5 @@ export default defineEventHandler(async (event) => {
             grant_support: false
         }
     });
-    return data;
+    return {sucess: "lesson created"};
 })

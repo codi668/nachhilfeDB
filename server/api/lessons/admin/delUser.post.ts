@@ -10,17 +10,10 @@ export default defineEventHandler(async (event) => {
     const {id} = await readBody(event);
     if(!id) return {error: "check input"};
 
-    await prisma.lessons.updateMany({
+    const data = await prisma.user.delete({
         where: {
-            id: id,
-            tutorID: event.context.id.id,
-            canceled: false,
-            paid: false
-        },
-        data: {
-            canceled: true
+            id: id
         }
     });
-
-    return {sucess: "lesson canceled"};
+    return data;
 })

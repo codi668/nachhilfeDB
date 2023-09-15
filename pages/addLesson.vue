@@ -9,60 +9,94 @@ definePageMeta({
   ],
 });
 
-const {data: tutor_data} = await useFetch('/api/lessons/tutor/getStudents', {method: 'GET'});
-const students = tutor_data.value;
-let selectedStudent = '';
+const { data: student_data } = await useFetch('/api/lessons/tutor/getStudents', {method: 'GET'});
+const student_values = student_data._rawValue;
+let student_names = [];
+student_values.forEach((student: any) => {
+  student_names.push(student.name);
+});
 
-async function addLesson() {
-  const subject = document.getElementById('fach')?.value;
-  const date = document.getElementById('datum')?.value;
-  const start_time = document.getElementById('start_time')?.value;
-  const end_time = document.getElementById('end_time')?.value;
+async function addLesson(credentials: any) {
+  const student_name = credentials.student;
+  let studentID;
+  student_values.forEach((student: any) => {
+    if(student.name === student_name) {
+      studentID = student.id;
+    }
+  })
+  const subject = credentials.subject;
+  const date = credentials.date;
+  const start_time = credentials.start_time;
+  const end_time = credentials.end_time;
+
   const {data: res} = await useFetch('/api/lessons/tutor/addLesson', {method: 'POST', body: {
-    student_name: selectedStudent.name, studentID: selectedStudent.id, subject: subject, date: date,
+    student_name: student_name, studentID: studentID, subject: subject, date: date,
       start_time: start_time, end_time: end_time}});
-  if(res.value?.hasOwnProperty('error')) {
+  if(!res.value?.hasOwnProperty('error')) {
+    alert("Erfolgreich!");
+    navigateTo('/dashboard');
+  }
+  else {
     if(res.value?.error === "check input") {
       alert("Eingabe überprüfen");
+    }
+    else if(res.value?.error === "not authenticated" || res.value?.error === "not authorized") {
+      alert("Bitte erneut anmelden");
+      navigateTo("/");
     }
     else {
       alert("Anderer Fehler");
     }
-  }
-  else {
-    alert("Erfolgreich!");
-    navigateTo('/dashboard');
   }
 }
 
 </script>
 
 <template>
-
-  <div class="p-10 grid gap-6 mb-6 md:grid-cols-6">
-    <div>
-      <label for="students" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Student:</label>
-      <select id="student" v-model="selectedStudent" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-        <option v-for="student in students" :value="student">{{ student.name }}</option>
-      </select>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div class="space-y-6">
+      <FormKit
+          type="form"
+          submit-label="Stunde hinzufügen"
+          @submit="addLesson"
+          novalidate="true"
+      >
+        <FormKit
+            type="select"
+            name="student"
+            label="Schüler"
+            placeholder="Wähle einen Schüler aus"
+            :options=student_names
+            validation="required"
+        />
+        <FormKit
+            type="text"
+            name="subject"
+            label="Fach"
+            validation="required"
+        />
+        <FormKit
+            type="date"
+            name="date"
+            label="Datum"
+            value="2023-09-01"
+            validation="required"
+        />
+        <FormKit
+            type="time"
+            name="start_time"
+            label="Startzeit"
+            value="00:00"
+            validation="required"
+        />
+        <FormKit
+            type="time"
+            name="end_time"
+            label="Endzeit"
+            value="00:00"
+            validation="required"
+        />
+      </FormKit>
     </div>
-    <div>
-      <label for="fach" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fach: </label>
-      <input type="text" id="fach" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Mathe" required>
-    </div>
-    <div>
-      <label for="datum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Datum:</label>
-      <input type="date" id="datum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="2023-09-01" min="2023-09-01" max="2035-09-01"/>
-    </div>
-    <div>
-      <label for="datum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start:</label>
-      <input type="time" id="start_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="10:00"/>
-    </div>
-    <div>
-      <label for="datum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End:</label>
-      <input type="time" id="end_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="11:00"/>
-    </div>
-    <button type="submit" @click="addLesson" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
   </div>
-
 </template>
