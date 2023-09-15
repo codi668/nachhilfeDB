@@ -1,7 +1,5 @@
 <script setup lang="ts">
 
-import {fastForward} from "@formkit/icons";
-
 definePageMeta({
   middleware: [
     function (to, from) {
@@ -18,7 +16,7 @@ user_values.forEach((user: any) => {
   user_names.push(user.name);
 });
 
-async function delUser(credentials: any) {
+async function resetUser(credentials: any) {
   let id;
   user_values.forEach((user: any) => {
     if(user.name === credentials.user) {
@@ -26,8 +24,8 @@ async function delUser(credentials: any) {
     }
   })
 
-  if(confirm('"' + credentials.user + '" löschen? Diese Aktion kann nicht rückgängig gemacht werden')) {
-    const {data: res} = await useFetch('/api/lessons/admin/delUser', {method: 'POST', body: {
+  if(confirm('"' + credentials.user + '" einen Passwort Reset Link schicken?')) {
+    const {data: res} = await useFetch('/api/lessons/admin/resetUser', {method: 'POST', body: {
         id: id}});
     if(!res.value?.hasOwnProperty('error')) {
       alert("Erfolgreich!");
@@ -55,8 +53,8 @@ async function delUser(credentials: any) {
     <div class="space-y-6 mx-5">
       <FormKit
           type="form"
-          submit-label="Benutzer entfernen"
-          @submit="delUser"
+          submit-label="Benutzer zurücksetzen"
+          @submit="resetUser"
           novalidate="true"
       >
         <FormKit

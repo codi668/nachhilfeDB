@@ -15,5 +15,5 @@ export default defineEventHandler(async (event) => {
             id: id
         }
     });
-    return data;
+    return {sucess: "user deleted"};
 })

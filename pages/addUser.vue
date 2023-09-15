@@ -31,7 +31,7 @@ async function addUser(credentials: any) {
     if(res.value?.error === "check input") {
       alert("Eingabe überprüfen");
     }
-    else if(res.value?.error === "not authenticated" || res.value?.error) {
+    else if(res.value?.error === "not authenticated" || res.value?.error === "not authorized") {
       alert("Bitte erneut anmelden");
       navigateTo("/");
     }

@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
         where: {
             canceled: false,
             paid: true,
-            req_support: true
+            req_support: true,
         }
     });
     return data;

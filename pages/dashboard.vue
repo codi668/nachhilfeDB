@@ -155,6 +155,19 @@ async function request_support(id: string) {
     }
   }
 }
+
+async function grant_support(id: string) {
+  if(confirm("Förderung bestätigen?")) {
+    const {data: request_res} = await useFetch('/api/lessons/supporter/grant', {method: 'POST', body: {id: id}});
+    if(request_res.value?.hasOwnProperty('error')) {
+      alert("Anderer Fehler");
+    }
+    else {
+      alert("Erfolgreich!");
+      location.href = "/dashboard";
+    }
+  }
+}
 </script>
 
 <template>
@@ -196,6 +209,7 @@ async function request_support(id: string) {
     <div>
       <button id="add-user" @click="navigateTo('/addUser')" class="cursor-pointer rounded-md bg-indigo-600 ml-10 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Benutzer anlegen</button>
       <button id="del-user" @click="navigateTo('/delUser')" class="cursor-pointer rounded-md bg-indigo-600 ml-5 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Benutzer löschen</button>
+      <button id="reset-user" @click="navigateTo('/resetUser')" class="cursor-pointer rounded-md bg-indigo-600 ml-5 mt-3 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Benutzer zurücksetzen</button>
     </div>
     <li v-for="lesson in admin_values" :key="lesson.id" class="flex justify-between gap-x-6 py-5">
       <div class="flex min-w-0 gap-x-4 ml-4">
@@ -248,10 +262,13 @@ async function request_support(id: string) {
         </div>
       </div>
       <div v-if="lesson.paid===true && lesson.req_support===false">
-        <button id="cancel-lesson" @click="request_support(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">request</button>
+        <button @click="request_support(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">request</button>
       </div>
-      <div v-if="lesson.req_support===true">
+      <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===false">
         <p class="mt-1 truncate text-xs leading-5 text-gray-500">requested</p>
+      </div>
+      <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===true">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">granted</p>
       </div>
       <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
         <p class="text-sm leading-6 text-gray-900">
@@ -271,6 +288,12 @@ async function request_support(id: string) {
           <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
           <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.tutor_name }}</p>
         </div>
+      </div>
+      <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===false">
+        <button @click="grant_support(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">grant</button>
+      </div>
+      <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===true">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">granted</p>
       </div>
       <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
         <p class="text-sm leading-6 text-gray-900">

@@ -9,8 +9,7 @@ export default defineEventHandler(async (event) => {
     const data = await prisma.lessons.findMany({
         where: {
             studentID: event.context.id.id,
-            canceled: false,
-            grant_support: false
+            canceled: false
         }
     });
     return data;
