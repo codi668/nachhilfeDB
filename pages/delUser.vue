@@ -29,7 +29,6 @@ async function delUser(credentials: any) {
   if(confirm('"' + credentials.user + '" löschen? Diese Aktion kann nicht rückgängig gemacht werden')) {
     const {data: res} = await useFetch('/api/lessons/admin/delUser', {method: 'POST', body: {
         id: id}});
-    console.log(res);
     if(!res.value?.hasOwnProperty('error')) {
       alert("Erfolgreich!");
       navigateTo('/dashboard');
