@@ -8,30 +8,31 @@ datasource db {
 }
 
 model User {
+  admin       Boolean @default(false)
+  email       String
   id          Int     @id @unique @default(autoincrement())
   name        String
-  email       String
   password    String
   reset_token String
-  admin       Boolean @default(false)
-  tutor       Boolean @default(false)
+  sponsering  Int     @default(0)
   student     Boolean @default(false)
   supporter   Boolean @default(false)
+  tutor       Boolean @default(false)
   wage        Int     @default(0)
-  sponsering  Int     @default(0)
+  salt        String  @default("")
 }
 
 model Lessons {
-  id            Int      @id @unique @default(autoincrement())
-  studentID     Int      @default(0)
-  tutorID       Int      @default(0)
-  student_name  String
-  tutor_name    String
-  start_date    DateTime
-  end_date      DateTime
-  subject       String
   canceled      Boolean  @default(false)
+  end_date      DateTime
+  grant_support Boolean  @default(false)
+  id            Int      @id @unique @default(autoincrement())
   paid          Boolean  @default(false)
   req_support   Boolean  @default(false)
-  grant_support Boolean  @default(false)
+  start_date    DateTime
+  studentID     Int      @default(0)
+  student_name  String
+  subject       String
+  tutorID       Int      @default(0)
+  tutor_name    String
 }

@@ -1,5 +1,6 @@
 import * as JWT from 'jose';
 import {PrismaClient} from "@prisma/client";
+import crypto from "crypto";
 
 const prisma = new PrismaClient();
 const secret = new TextEncoder().encode(process.env.JWT_TOKEN_SECRET);
@@ -9,10 +10,22 @@ export default defineEventHandler(async (event) => {
     const {email, password} = await readBody(event);
     if(!email || !password) return {error: "check input"};
 
+    const salt_data = await prisma.user.findFirst({
+        where: {
+            email: <string>email
+        },
+        select: {
+            salt: true
+        }
+    });
+    if(salt_data === null) return {error: "invalid login"};
+    const passwordSalt = salt_data.salt;
+    const hashedPassword = crypto.createHash('sha256').update((password+passwordSalt)).digest('hex');
+
     const data = await prisma.user.findFirst({
         where: {
             email: <string>email,
-            password: <string>password
+            password: <string>hashedPassword
         }
     });
     if(data === null) return {error: "invalid login"};
