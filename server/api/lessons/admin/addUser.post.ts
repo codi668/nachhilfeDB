@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
 
     const reset_token = [...Array(40)].map(() => Math.random().toString(36)[2]).join('');
     const tempPassword = [...Array(40)].map(() => Math.random().toString(36)[2]).join('');
-    const reset_link = "http://localhost:3000/reset?resetToken=" + reset_token;
+    const reset_link = "https://nachhilfe-db.lter.cc/reset?resetToken=" + reset_token;
 
     const data = await prisma.user.create({
         data: {
@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
             " deine Nachhilfestunden einsehen. Zusätzlich bietet die Website die Möglichkeit eine Förderung für" +
             " gehaltenen Nachhilfestunden zu beantragen! </div><br><div>Um Zugang zur Platform zu erhalten erstelle dir ein" +
             " Passwort! <a href=" + reset_link + ">Hier Klicken</a></div><br><div>Danach kannst du dich jederzeit hier" +
-            " <a href='http://localhost:3000'>Anmelden</a> (https://nachhilfe-db.lter.cc)" + "!</div><br><div>Bei Fragen schreib einfach eine Email an" +
+            " <a href='https://nachhilfe-db.lter.cc'>Anmelden</a> (https://nachhilfe-db.lter.cc)" + "!</div><br><div>Bei Fragen schreib einfach eine Email an" +
             " <a href='mailto:benedikt.walter@htlstp.at'>benedikt.walter@htlstp.at</a></div>"
     });
 

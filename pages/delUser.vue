@@ -52,7 +52,7 @@ async function delUser(credentials: any) {
 
 <template>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <div class="space-y-6">
+    <div class="space-y-6 mx-5">
       <FormKit
           type="form"
           submit-label="Benutzer entfernen"
