@@ -8,8 +8,8 @@ export default defineEventHandler(async (event) => {
         return event.context.auth;
     }
 
-    const {name, email, admin, tutor, student, supporter} = await readBody(event);
-    if(!name || !email || admin===undefined || tutor===undefined || student===undefined || supporter===undefined) return {error: "check input"};
+    const {name, email, admin, tutor, student, supporter, wage} = await readBody(event);
+    if(!name || !email || admin===undefined || tutor===undefined || student===undefined || supporter===undefined || wage===undefined) return {error: "check input"};
 
     const reset_token = [...Array(40)].map(() => Math.random().toString(36)[2]).join('');
     const tempPassword = [...Array(40)].map(() => Math.random().toString(36)[2]).join('');
@@ -24,7 +24,8 @@ export default defineEventHandler(async (event) => {
             tutor: tutor,
             student: student,
             supporter: supporter,
-            reset_token: reset_token
+            reset_token: reset_token,
+            wage: <number>wage
         }
     });
 
@@ -38,9 +39,7 @@ export default defineEventHandler(async (event) => {
         }
     });
 
-    console.log("Welcome Email sent to: " + email);
-
-    await transporter.sendMail({
+    const email_res = await transporter.sendMail({
         from: '"Nachhilfesystem EL" <no-reply@lter.cc>',
         to: email,
         subject: "Willkommen im Nachhilfesystem EL",
@@ -54,6 +53,9 @@ export default defineEventHandler(async (event) => {
             " <a href='mailto:benedikt.walter@htlstp.at'>benedikt.walter@htlstp.at</a></div>" +
             "Liebe Grüße,</div><div>dein Nachhilfeteam</div>"
     });
+
+    console.log("Welcome Email sent to: " + email);
+    console.log(email_res);
 
     return {sucess: "user created"};
 })

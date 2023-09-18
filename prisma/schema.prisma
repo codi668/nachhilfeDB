@@ -35,4 +35,6 @@ model Lessons {
   subject       String
   tutorID       Int      @default(0)
   tutor_name    String
+  price         Float?
+  support       Float?
 }

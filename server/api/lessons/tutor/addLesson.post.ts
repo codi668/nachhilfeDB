@@ -19,14 +19,26 @@ export default defineEventHandler(async (event) => {
     const start_date = new Date(Date.UTC(year, month-1, day, start_hour, start_minute));
     const end_date = new Date(Date.UTC(year, month-1, day, end_hour, end_minute));
 
-    const tutor_name = (await prisma.user.findFirst({
+    if(start_date.getTime() >= end_date.getTime()) {
+        return {error: "check input"};
+    }
+    const minutes:number = (end_date.getTime() - start_date.getTime())/60000;
+    console.log(minutes)
+
+    const tutor_info = (await prisma.user.findFirst({
         where: {
             id: event.context.id.id
         },
         select: {
-            name: true
+            name: true,
+            wage: true
         }
-    }))?.name || ''
+    }));
+    const tutor_name = tutor_info?.name || '';
+    const tutor_wage:number = <number>(tutor_info?.wage) || 0;
+
+    const price:number = tutor_wage*(minutes/60);
+
     const data = await prisma.lessons.create({
         data: {
             student_name: student_name,
@@ -39,7 +51,8 @@ export default defineEventHandler(async (event) => {
             canceled: false,
             paid: false,
             req_support: false,
-            grant_support: false
+            grant_support: false,
+            price: price
         }
     });
     return {sucess: "lesson created"};

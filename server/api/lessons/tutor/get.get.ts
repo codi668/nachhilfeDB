@@ -11,6 +11,9 @@ export default defineEventHandler(async (event) => {
             tutorID: event.context.id.id,
             canceled: false,
             paid: false
+        },
+        orderBy: {
+            start_date: 'asc'
         }
     });
     return data;

@@ -10,6 +10,9 @@ export default defineEventHandler(async (event) => {
         where: {
             studentID: event.context.id.id,
             canceled: false
+        },
+        orderBy: {
+            start_date: 'asc'
         }
     });
     return data;

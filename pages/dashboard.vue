@@ -215,8 +215,20 @@ async function grant_support(id: string) {
       <div class="flex min-w-0 gap-x-4 ml-4">
         <div class="min-w-0 flex-auto">
           <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
-          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.tutor_name }}</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.tutor_name }} ({{ lesson.price?.toFixed(2) }}€)</p>
         </div>
+      </div>
+      <div v-if="lesson.paid===false && lesson.req_support===false">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">bezahlen</p>
+      </div>
+      <div v-if="lesson.paid===true && lesson.req_support===false">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">bezahlt</p>
+      </div>
+      <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===false">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">angefordert</p>
+      </div>
+      <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===true">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">bestätigt</p>
       </div>
       <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
         <p class="text-sm leading-6 text-gray-900">
@@ -237,7 +249,7 @@ async function grant_support(id: string) {
       <div class="flex min-w-0 gap-x-4 ml-4">
         <div class="min-w-0 flex-auto">
           <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
-          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }}</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }} ({{ lesson.price?.toFixed(2) }}€)</p>
         </div>
       </div>
       <button id="cancel-lesson" @click="cancel_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">cancel</button>
@@ -258,17 +270,20 @@ async function grant_support(id: string) {
       <div class="flex min-w-0 gap-x-4 ml-4">
         <div class="min-w-0 flex-auto">
           <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.tutor_name }}</p>
-          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }}</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }} ({{ lesson.price?.toFixed(2) }}€)</p>
         </div>
       </div>
+      <div v-if="lesson.paid===false && lesson.req_support===false">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">bezahlen</p>
+      </div>
       <div v-if="lesson.paid===true && lesson.req_support===false">
-        <button @click="request_support(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">request</button>
+        <button @click="request_support(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">anfordern</button>
       </div>
       <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===false">
-        <p class="mt-1 truncate text-xs leading-5 text-gray-500">requested</p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">angefordert</p>
       </div>
       <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===true">
-        <p class="mt-1 truncate text-xs leading-5 text-gray-500">granted</p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">bestätigt</p>
       </div>
       <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
         <p class="text-sm leading-6 text-gray-900">
@@ -285,15 +300,15 @@ async function grant_support(id: string) {
     <li v-for="lesson in supporter_values" :key="lesson.id" class="flex justify-between gap-x-6 py-5">
       <div class="flex min-w-0 gap-x-4 ml-4">
         <div class="min-w-0 flex-auto">
-          <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
-          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.tutor_name }}</p>
+          <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.tutor_name }}</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }} ({{ lesson.price?.toFixed(2) }}€)</p>
         </div>
       </div>
       <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===false">
-        <button @click="grant_support(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">grant</button>
+        <button @click="grant_support(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">bestätigen</button>
       </div>
       <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===true">
-        <p class="mt-1 truncate text-xs leading-5 text-gray-500">granted</p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">bestätigt</p>
       </div>
       <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
         <p class="text-sm leading-6 text-gray-900">

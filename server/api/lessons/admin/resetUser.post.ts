@@ -46,9 +46,7 @@ export default defineEventHandler(async (event) => {
         }
     });
 
-    console.log("Reset password Email sent to: " + email);
-
-    await transporter.sendMail({
+    const email_res = await transporter.sendMail({
         from: '"Nachhilfesystem EL" <no-reply@lter.cc>',
         to: email,
         subject: "Willkommen im Nachhilfesystem EL",
@@ -60,6 +58,9 @@ export default defineEventHandler(async (event) => {
             " <a href='mailto:benedikt.walter@htlstp.at'>benedikt.walter@htlstp.at</a></div><br><div>" +
             "Liebe Grüße,</div><div>dein Nachhilfeteam</div>"
     });
+
+    console.log("Reset password Email sent to: " + email);
+    console.log(email_res);
 
     return {sucess: "user reset"};
 })

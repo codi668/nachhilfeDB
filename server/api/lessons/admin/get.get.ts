@@ -6,6 +6,10 @@ export default defineEventHandler(async (event) => {
     if(event.context.auth !== undefined) {
         return event.context.auth;
     }
-    const data = await prisma.lessons.findMany();
+    const data = await prisma.lessons.findMany({
+        orderBy: {
+            start_date: 'asc'
+        }
+    });
     return data;
 })

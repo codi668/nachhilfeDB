@@ -9,6 +9,8 @@ definePageMeta({
   ],
 });
 
+const subjects = ['Deutsch', 'Englisch', 'Mathematik', 'NW', 'HWE', 'MTRS', 'DIC', 'KSN', 'FSST', 'Sonstiges'];
+
 const { data: student_data } = await useFetch('/api/lessons/tutor/getStudents', {method: 'GET'});
 const student_values = student_data._rawValue;
 let student_names = [];
@@ -70,9 +72,11 @@ async function addLesson(credentials: any) {
             validation="required"
         />
         <FormKit
-            type="text"
+            type="select"
             name="subject"
             label="Fach"
+            placeholder="Wähle ein Fach aus"
+            :options=subjects
             validation="required"
         />
         <FormKit

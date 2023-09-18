@@ -1,7 +1,5 @@
 <script setup lang="ts">
 
-import {fastForward} from "@formkit/icons";
-
 definePageMeta({
   middleware: [
     function (to, from) {
@@ -11,6 +9,8 @@ definePageMeta({
   ],
 });
 
+const wages = ["Kein Gehalt", "20€", "25€", "30€"];
+
 async function addUser(credentials: any) {
   const name = credentials.name;
   const email = credentials.email;
@@ -18,10 +18,27 @@ async function addUser(credentials: any) {
   const tutor = credentials.tutor || false;
   const student = credentials.student || false;
   const supporter = credentials.supporter || false;
+  let wage_input = credentials.wage;
+  let wage = 0;
+  if(!tutor) {
+    wage_input = "0€";
+  }
+  if(wage_input === "30€") {
+    wage = 30;
+  }
+  else if(wage_input === "25€") {
+    wage = 25;
+  }
+  else if(wage_input === "20€") {
+    wage = 20;
+  }
+  else {
+    wage = 0;
+  }
 
   const {data: res} = await useFetch('/api/lessons/admin/addUser', {method: 'POST', body: {
       name: name, email: email, admin: admin, tutor: tutor,
-      student: student, supporter: supporter}});
+      student: student, supporter: supporter, wage: wage}});
   console.log(res);
   if(!res.value?.hasOwnProperty('error')) {
     alert("Erfolgreich!");
@@ -65,6 +82,15 @@ async function addUser(credentials: any) {
             label="Email"
             help="vorname.nachname@htlstp.at"
             validation="required|email"
+        />
+        <FormKit
+            type="select"
+            name="wage"
+            label="Stundenlohn"
+            placeholder="Wähle den Stundenlohn aus"
+            :options=wages
+            help="Nur für Tutoren!"
+            validation="required"
         />
         <FormKit
             type="checkbox"
