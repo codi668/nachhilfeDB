@@ -243,18 +243,20 @@ async function grant_support(id: string) {
 
   <ul v-else-if="show==='tutor'" role="list" class="divide-y divide-gray-100">
     <div>
-      <button @click="navigateTo('/addLesson')" id="add-lesson" class="cursor-pointer rounded-md bg-indigo-600 ml-10 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Stunde anlegen</button>
+      <button @click="navigateTo('/addLesson')" id="add-lesson" class="cursor-pointer rounded-md bg-indigo-600 ml-10 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Stunde anlegen</button>
     </div>
-    <li v-for="lesson in tutor_values" :key="lesson.id" class="flex justify-between gap-x-6 py-5">
-      <div class="flex min-w-0 gap-x-4 ml-4">
+    <li v-for="lesson in tutor_values" :key="lesson.id" class="flex justify-between gap-x-2 py-5">
+      <div class="flex min-w-0 ml-3">
         <div class="min-w-0 flex-auto">
           <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
-          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }} ({{ lesson.price?.toFixed(2) }}€)</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }}</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.price?.toFixed(2) }}€</p>
         </div>
       </div>
-      <button id="cancel-lesson" @click="cancel_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">cancel</button>
-      <button id="paid-lesson" @click="paid_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">paid</button>
-      <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-4">
+      <button id="edit-lesson" @click="navigateTo('/editLesson?id='+lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-2 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">edit</button>
+      <button id="cancel-lesson" @click="cancel_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-2 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">cancel</button>
+      <button id="paid-lesson" @click="paid_lesson(lesson.id)" class="cursor-pointer rounded-md bg-indigo-600 px-2 py-1 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">paid</button>
+      <div class="shrink-0 sm:flex sm:flex-col sm:items-end mr-3">
         <p class="text-sm leading-6 text-gray-900">
           {{ lesson.day }}.{{ lesson.month }}.{{ lesson.year }}
         </p>

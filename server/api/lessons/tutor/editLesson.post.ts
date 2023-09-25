@@ -7,8 +7,8 @@ export default defineEventHandler(async (event) => {
         return event.context.auth;
     }
 
-    const {student_name, studentID, subject, date, start_time, end_time} = await readBody(event);
-    if(!student_name || !studentID || !subject || !date || !start_time || !end_time) return {error: "check input"};
+    const {lessonID, date, start_time, end_time} = await readBody(event);
+    if(!lessonID || !date || !start_time || !end_time) return {error: "check input"};
     const year = date.slice(0, 4);
     const month = date.slice(5, 7);
     const day = date.slice(8, 10);
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
 
     const tutor_info = (await prisma.user.findFirst({
         where: {
-            id: event.context.id.id
+            id: <number>event.context.id.id
         },
         select: {
             name: true,
@@ -38,15 +38,15 @@ export default defineEventHandler(async (event) => {
 
     const price:number = tutor_wage*(minutes/60);
 
-    const data = await prisma.lessons.create({
+    const data = await prisma.lessons.update({
+        where: {
+            id: parseInt(lessonID),
+            tutorID: <number>event.context.id.id,
+            tutor_name: tutor_name
+        },
         data: {
-            student_name: student_name,
-            tutor_name: tutor_name,
-            studentID: studentID,
-            tutorID: event.context.id.id,
             start_date: start_date,
             end_date: end_date,
-            subject: subject,
             canceled: false,
             paid: false,
             req_support: false,
@@ -54,5 +54,5 @@ export default defineEventHandler(async (event) => {
             price: price
         }
     });
-    return {sucess: "lesson created"};
+    return {sucess: "lesson edited"};
 })

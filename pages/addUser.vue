@@ -9,7 +9,7 @@ definePageMeta({
   ],
 });
 
-const wages = ["Kein Gehalt", "20€", "25€", "30€"];
+const wages = ["Kein Gehalt", "15€", "20€", "25€", "30€"];
 
 async function addUser(credentials: any) {
   const name = credentials.name;
@@ -31,6 +31,9 @@ async function addUser(credentials: any) {
   }
   else if(wage_input === "20€") {
     wage = 20;
+  }
+  else if(wage_input === "15€") {
+    wage = 15;
   }
   else {
     wage = 0;
@@ -84,15 +87,6 @@ async function addUser(credentials: any) {
             validation="required|email"
         />
         <FormKit
-            type="select"
-            name="wage"
-            label="Stundenlohn"
-            placeholder="Wähle den Stundenlohn aus"
-            :options=wages
-            help="Nur für Tutoren!"
-            validation="required"
-        />
-        <FormKit
             type="checkbox"
             name="admin"
             label="Admin"
@@ -115,6 +109,15 @@ async function addUser(credentials: any) {
             name="supporter"
             label="Supporter"
             help="Supporter Rechte (nicht empfohlen!)"
+        />
+        <FormKit
+            type="select"
+            name="wage"
+            label="Stundenlohn"
+            placeholder="Wähle den Stundenlohn aus"
+            :options=wages
+            help="Nur für Tutoren!"
+            validation="required"
         />
       </FormKit>
     </div>

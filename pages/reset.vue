@@ -2,7 +2,7 @@
 async function resetPassword(credentials: any) {
   const password1 = credentials.password1;
   const password2 = credentials.password2;
-  const resetToken = Object.fromEntries((new URLSearchParams(window.location.search)).entries()).resetToken || undefined;
+  const resetToken = Object.fromEntries((new URLSearchParams(window.location.search)).entries()).resetToken || '';
 
   const { data: res } = await useFetch('/api/user/reset', {method: 'POST', body: {password1: password1,
       password2: password2, reset_token: resetToken}});
