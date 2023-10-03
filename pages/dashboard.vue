@@ -218,7 +218,10 @@ async function grant_support(id: string) {
           <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.tutor_name }} ({{ lesson.price?.toFixed(2) }}€)</p>
         </div>
       </div>
-      <div v-if="lesson.paid===false && lesson.req_support===false">
+      <div v-if="lesson.canceled===true">
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">canceled</p>
+      </div>
+      <div v-if="lesson.paid===false">
         <p class="mt-1 truncate text-xs leading-5 text-gray-500">bezahlen</p>
       </div>
       <div v-if="lesson.paid===true && lesson.req_support===false">
@@ -275,7 +278,7 @@ async function grant_support(id: string) {
           <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }} ({{ lesson.price?.toFixed(2) }}€)</p>
         </div>
       </div>
-      <div v-if="lesson.paid===false && lesson.req_support===false">
+      <div v-if="lesson.paid===false">
         <p class="mt-1 truncate text-xs leading-5 text-gray-500">bezahlen</p>
       </div>
       <div v-if="lesson.paid===true && lesson.req_support===false">

@@ -10,7 +10,9 @@ export default defineEventHandler(async (event) => {
         where: {
             tutorID: event.context.id.id,
             canceled: false,
-            paid: false
+            paid: false,
+            req_support: false,
+            grant_support: false
         },
         orderBy: {
             start_date: 'asc'
