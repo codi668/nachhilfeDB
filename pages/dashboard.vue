@@ -305,7 +305,7 @@ async function grant_support(id: string) {
     <li v-for="lesson in supporter_values" :key="lesson.id" class="flex justify-between gap-x-6 py-5">
       <div class="flex min-w-0 gap-x-4 ml-4">
         <div class="min-w-0 flex-auto">
-          <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.tutor_name }}</p>
+          <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
           <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }} ({{ lesson.price?.toFixed(2) }}€)</p>
         </div>
       </div>
