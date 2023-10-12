@@ -15,5 +15,11 @@ export default defineEventHandler(async (event) => {
             name: true
         }
     });
+
+    for(let i = 0; i < data.length; i++) {
+        const [vorname, nachname] = data[i].name.split(" ");
+        data[i].name = nachname.substring(0,3) + vorname.substring(0,3);
+    }
+
     return data;
 })
