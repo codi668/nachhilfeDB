@@ -15,15 +15,17 @@ const { data: student_data } = await useFetch('/api/lessons/tutor/getStudents', 
 const student_values = student_data._rawValue;
 let student_names = [];
 student_values.forEach((student: any) => {
-  student_names.push(student.name);
+  student_names.push(student.shortname);
 });
 
 async function addLesson(credentials: any) {
-  const student_name = credentials.student;
+  const student_shortname = credentials.student;
   let studentID;
+  let student_name;
   student_values.forEach((student: any) => {
-    if(student.name === student_name) {
+    if(student.shortname === student_shortname) {
       studentID = student.id;
+      student_name = student.name;
     }
   })
   const subject = credentials.subject;
