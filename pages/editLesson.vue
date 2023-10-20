@@ -9,6 +9,13 @@ definePageMeta({
   ],
 });
 
+const lessonID = Object.fromEntries((new URLSearchParams(window.location.search)).entries()).id || '';
+const {data: res} = await useFetch('/api/lessons/tutor/getLesson', {method: 'POST', body: {
+    lessonID: lessonID}});
+const date = res.value.start_date.substring(0, 10);
+const start_time = res.value.start_date.substring(11, 16);
+const end_time = res.value.end_date.substring(11, 16);
+
 async function editLesson(credentials: any) {
   const lessonID = Object.fromEntries((new URLSearchParams(window.location.search)).entries()).id || '';
   const student_name = credentials.student;
@@ -52,21 +59,21 @@ async function editLesson(credentials: any) {
             type="date"
             name="date"
             label="Datum"
-            value="2023-09-01"
+            v-model="date"
             validation="required"
         />
         <FormKit
             type="time"
             name="start_time"
             label="Startzeit"
-            value="00:00"
+            v-model="start_time"
             validation="required"
         />
         <FormKit
             type="time"
             name="end_time"
             label="Endzeit"
-            value="00:00"
+            v-model="end_time"
             validation="required"
         />
       </FormKit>

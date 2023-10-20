@@ -10,6 +10,8 @@ definePageMeta({
 });
 
 const subjects = ['Deutsch', 'Englisch', 'Mathematik', 'NW', 'HWE', 'MTRS', 'DIC', 'KSN', 'FSST', 'Sonstiges'];
+const date = new Date();
+const today = date.getUTCFullYear() + "-" + date.getUTCMonth() + "-" + date.getUTCDate();
 
 const { data: student_data } = await useFetch('/api/lessons/tutor/getStudents', {method: 'GET'});
 const student_values = student_data._rawValue;
@@ -85,21 +87,21 @@ async function addLesson(credentials: any) {
             type="date"
             name="date"
             label="Datum"
-            value="2023-09-01"
+            v-model="today"
             validation="required"
         />
         <FormKit
             type="time"
             name="start_time"
             label="Startzeit"
-            value="00:00"
+            value="12:00"
             validation="required"
         />
         <FormKit
             type="time"
             name="end_time"
             label="Endzeit"
-            value="00:00"
+            value="12:00"
             validation="required"
         />
       </FormKit>
