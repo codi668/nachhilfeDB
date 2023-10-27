@@ -9,9 +9,7 @@ export default defineEventHandler(async (event) => {
 
     const {student_name, studentID, subject, date, start_time, end_time} = await readBody(event);
     if(!student_name || !studentID || !subject || !date || !start_time || !end_time) return {error: "check input"};
-    const year = date.slice(0, 4);
-    const month = date.slice(5, 7);
-    const day = date.slice(8, 10);
+    const [year, month, day] = date.split('-');
     const start_hour = start_time.slice(0, 2);
     const start_minute = start_time.slice(3, 5);
     const end_hour = end_time.slice(0, 2);
@@ -37,6 +35,7 @@ export default defineEventHandler(async (event) => {
     const tutor_wage:number = <number>(tutor_info?.wage) || 0;
 
     const price:number = tutor_wage*(minutes/60);
+    const support:number = (minutes/60)*5;
 
     const data = await prisma.lessons.create({
         data: {
@@ -51,7 +50,8 @@ export default defineEventHandler(async (event) => {
             paid: false,
             req_support: false,
             grant_support: false,
-            price: price
+            price: price,
+            support: support
         }
     });
     return {sucess: "lesson created"};

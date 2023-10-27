@@ -306,7 +306,7 @@ async function grant_support(id: string) {
       <div class="flex min-w-0 gap-x-4 ml-4">
         <div class="min-w-0 flex-auto">
           <p class="text-sm font-semibold leading-6 text-gray-900">{{ lesson.student_name }}</p>
-          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }} ({{ lesson.price?.toFixed(2) }}€)</p>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ lesson.subject }} ({{ lesson.support?.toFixed(2) }}€)</p>
         </div>
       </div>
       <div v-if="lesson.paid===true && lesson.req_support===true && lesson.grant_support===false">
