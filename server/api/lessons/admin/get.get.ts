@@ -7,6 +7,9 @@ export default defineEventHandler(async (event) => {
         return event.context.auth;
     }
     const data = await prisma.lessons.findMany({
+        where: {
+            grant_support: false
+        },
         orderBy: {
             start_date: 'asc'
         }
