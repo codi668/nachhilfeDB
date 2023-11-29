@@ -9,9 +9,10 @@ definePageMeta({
   ],
 });
 
-const subjects = ['Deutsch', 'Englisch', 'Mathematik', 'NW', 'HWE', 'MTRS', 'DIC', 'KSN', 'FSST', 'Sonstiges'];
+const subjects = ['Deutsch', 'Englisch', 'Mathematik', 'NW', 'HWE', 'MTRS', 'DIC', 'KSN', 'FSST', 'POS', 'WMC', 'DBI',
+  'NSCS', 'TMB', 'CAD', 'MEL', 'FET', 'MANL', 'WIR', 'IDES', 'KDG', 'Sonstiges'];
 const date = new Date();
-const today = date.getUTCFullYear() + "-" + date.getUTCMonth() + "-" + date.getUTCDate();
+const today = date.getUTCFullYear() + "-" + date.getUTCMonth()+1 + "-" + date.getUTCDate();
 
 const { data: student_data } = await useFetch('/api/lessons/tutor/getStudents', {method: 'GET'});
 const student_values = student_data._rawValue;
