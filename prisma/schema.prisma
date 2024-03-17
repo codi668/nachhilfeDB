@@ -13,13 +13,13 @@ model User {
   id          Int     @id @unique @default(autoincrement())
   name        String
   password    String
-  reset_token String
+  reset_token String?
   sponsering  Int     @default(0)
   student     Boolean @default(false)
   supporter   Boolean @default(false)
   tutor       Boolean @default(false)
   wage        Int     @default(0)
-  salt        String  @default("")
+  salt        String?
 }
 
 model Lessons {
