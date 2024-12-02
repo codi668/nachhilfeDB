@@ -13,13 +13,14 @@
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/nodemailer": "^6.4.10",
     "nuxt": "^3.7.1",
-    "prisma": "^5.2.0"
+    "prisma": "^5.20.0"
   },
   "dependencies": {
     "@formkit/icons": "^1.0.0",
     "@formkit/nuxt": "^1.0.0",
     "@formkit/themes": "^1.0.0",
-    "@prisma/client": "^5.2.0",
+    "@prisma/client": "^5.20.0",
+    "@supabase/supabase-js": "^2.46.2",
     "crypto": "^1.0.1",
     "flowbite": "^1.8.1",
     "jose": "^4.14.6",
